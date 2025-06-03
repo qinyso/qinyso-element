@@ -1,18 +1,21 @@
 {
-    "extends": "@tsconfig/node18/tsconfig.json",
-    "compilerOptions": {
-        "composite": true,
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "types": ["node"],
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
-    },
-    "include": [
-        "packages/**/*.config.ts",
-        "packages/**/*.ts",
-        "packages/**/*.tsx",
-        "packages/**/*.vue"
-    ]
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "types": ["node"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@toy-element/*": ["packages/*"]
+    }
+  },
+  "include": [
+    "packages/**/*.config.ts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue"
+  ]
 }

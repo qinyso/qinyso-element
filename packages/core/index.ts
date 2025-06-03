@@ -1,5 +1,5 @@
-import  makeInstaller  from 'D:\toy-element\packages\utils\install.ts';
-import components from 'D:\toy-element\packages\components'; 
+import  {makeInstaller}  from '../utils/install';
+import components from './components'; 
 const installer = makeInstaller(components);
-export * from 'D:\toy-element\packages\components';
+export * from '../components';
 export default installer
