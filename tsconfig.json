@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        // 严格模式相关配置
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        // 基础编译配置
+        "target": "ESNext", // 指定编译目标为ESNext标准，可根据项目需求调整
+        "useDefineForClassFields": true, // 启用类字段的新语法支持
+        "module": "ESNext", // 模块类型
+        "moduleResolution": "Node", // 模块解析策略，按Node.js的方式解析模块
+        "strict": true, // 开启严格模式，进行更严格的类型检查等
+        "jsx": "preserve", // 处理JSX的方式，这里保留JSX语法
+        "sourceMap": true, // 生成源映射文件，方便调试
+        "resolveJsonModule": true, // 允许导入JSON模块
+        "esModuleInterop": true, // 启用ES模块与CommonJS模块的互操作性
+        "lib": ["ESNext", "DOM"], // 声明项目使用的库，这里包含ESNext和DOM相关特性
+        // 路径别名配置，假设@组件库对应项目中的packages目录
+        "baseUrl": ".",
+        "paths": {
+            "@组件库/*": ["packages/*"]
+        }
+    },
+    "include": [
+        "packages/**/*.ts",
+        "packages/**/*.tsx",
+        "packages/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.spec.ts" // 排除测试文件，可按需调整
+    ]
+}
