@@ -8,13 +8,13 @@ importers:
 
   .:
     dependencies:
-      '@组件库/hooks':
+      '@toy-element/hooks':
         specifier: workspace:*
         version: link:packages/hooks
-      '@组件库/theme':
+      '@toy-element/theme':
         specifier: workspace:*
         version: link:packages/theme
-      '@组件库/utils':
+      '@toy-element/utils':
         specifier: workspace:*
         version: link:packages/utils
       lodash-es:
@@ -23,7 +23,7 @@ importers:
       vue:
         specifier: 3.4.19
         version: 3.4.19(typescript@5.8.3)
-      组件库:
+      toy-element:
         specifier: workspace:*
         version: link:packages/core
     devDependencies:

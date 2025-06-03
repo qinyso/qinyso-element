@@ -1,3 +1,3 @@
 import Button from '/Button.vue'
-import { withInstall} from '@组件库/utils'
+import { withInstall} from '@toy-element/utils'
 const ErButton = withInstall(Button)

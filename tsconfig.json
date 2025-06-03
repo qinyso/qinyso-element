@@ -18,7 +18,7 @@
         // 路径别名配置，假设@组件库对应项目中的packages目录
         "baseUrl": ".",
         "paths": {
-            "@组件库/*": ["packages/*"]
+            "@toy-elememnt/*": ["packages/*"]
         }
     },
     "include": [

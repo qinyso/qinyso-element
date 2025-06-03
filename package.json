@@ -1,5 +1,5 @@
 {
-  "name": "@组件库/workspace",
+  "name": "@toy-element/workspace",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -29,9 +29,9 @@
   "dependencies": {
     "lodash-es": "4.17.21",
     "vue": "3.4.19",
-    "组件库": "workspace:*",
-    "@组件库/hooks": "workspace:*",
-    "@组件库/utils": "workspace:*",
-    "@组件库/theme": "workspace:*"
+    "toy-element": "workspace:*",
+    "@toy-element/hooks": "workspace:*",
+    "@toy-element/utils": "workspace:*",
+    "@toy-element/theme": "workspace:*"
   }
 }
