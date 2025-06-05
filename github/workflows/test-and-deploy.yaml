@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   test:
     name: Run Lint and Test
