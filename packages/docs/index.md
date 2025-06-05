@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "toy-element"
+  name: "qinyso-element"
   text: "小白手搓的基础组件库"
   tagline: My great project tagline
   actions:
