@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "toy-element",
+  title: "qinyso-element",
   description: "小白手搓的基础组件库",
-  base :"/toy-element/",
+  base :"/qinyso-element/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
