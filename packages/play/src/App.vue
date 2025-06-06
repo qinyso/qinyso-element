@@ -3,7 +3,18 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-<er-button></er-button>
+  <div class="container">
+<er-button size="small">这是一个小按钮</er-button>
+<br>
+<er-button size="medium">这是一个中等按钮</er-button>
+<br>
+<er-button size="large">这是一个大按钮</er-button>
+<h2>点击效果测试</h2>
+<erButton variant="primary" size="xlarge">点击有粒子</erButton>
+<erButton variant="ghost" size="xlarge">幽灵按钮</erButton>
+<h2>圆角按钮</h2>
+  <erButton variant="primary" rounded size="jumbo">圆角巨型按钮</erButton>
+</div>
 </template>
 
 <style scoped>
