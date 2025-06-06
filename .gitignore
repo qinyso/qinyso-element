@@ -1,1 +1,24 @@
 node_modules
+packages/docs/vitepress/dist/
+# 其他通用忽略规则（补充上）
+# 操作系统临时文件
+.DS_Store
+Thumbs.db
+
+# 编译/打包产物（如果有其他构建目录，按需添加）
+dist/
+build/
+
+# 日志和缓存文件
+*.log
+*.cache
+
+# IDE 配置文件（VS Code、JetBrains 等）
+.vscode/
+.idea/
+*.iml
+
+# 包管理工具锁文件（根据实际使用的工具，比如 npm/yarn/pnpm）
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
