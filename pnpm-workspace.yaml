@@ -1,2 +1,10 @@
 ﻿packages:
  - "packages/**"
+ - "packages/core"
+ - "packages/ui"  
+ - "packages/utils"
+ - "packages/test"
+ - "packages/docs"
+
+
+
