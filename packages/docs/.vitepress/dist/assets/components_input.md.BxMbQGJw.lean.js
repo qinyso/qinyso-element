@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as n}from"./chunks/framework.BOW-zMUt.js";const d=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"components/input.md","filePath":"components/input.md"}'),o={name:"components/input.md"};function a(s,c,p,r,i,m){return n(),e("div")}const f=t(o,[["render",a]]);export{d as __pageData,f as default};
