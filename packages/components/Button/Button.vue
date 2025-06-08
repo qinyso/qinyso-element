@@ -9,6 +9,7 @@
       { 'neon-button--disabled': disabled || loading },
       { 'neon-button--rounded': rounded }
     ]"
+    <!-- 绑定鼠标迁入迁出事件 -->
     :disabled="disabled || loading"
     @click="handleClick"
     @mousemove="handleMouseMove"
@@ -21,6 +22,7 @@
     </span>
     <span v-else class="neon-button__content">
       <slot />
+     <!-- 粒子容器 -->
     </span>
     <div class="neon-button__particles" ref="particlesRef"></div>
   </button>
@@ -30,37 +32,42 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const props = defineProps({
+  // variant：按钮的样式变体
   variant: {
-    type: String,
+    type: String,//字符型
     default: 'primary',
     validator: (val: string) => ['primary', 'secondary', 'accent', 'ghost', 'outline'].includes(val)
   },
+  // size：按钮的尺寸
   size: {
     type: String,
     default: 'xlarge', // 默认超大尺寸
     validator: (val: string) => ['small', 'medium', 'large', 'xlarge', 'jumbo'].includes(val)
   },
+  // disabled：按钮是否禁用,true为禁用
   disabled: {
-    type: Boolean,
+    type: Boolean,//类型是布尔值
     default: false
   },
+  // 按钮是否处于加载状态
   loading: {
     type: Boolean,
     default: false
   },
+  // rounded：按钮是否圆角
   rounded: {
     type: Boolean,
     default: false
   }
 });
-
+//组件触发 click 事件时,过 emit 把这个事件传递给父组件
 const emit = defineEmits(['click']);
 
-const buttonRef = ref<HTMLButtonElement | null>(null);
-const particlesRef = ref<HTMLDivElement | null>(null);
-const gradientPosition = ref('50% 50%');
+const buttonRef = ref<HTMLButtonElement | null>(null);//引用<button> 元素
+const particlesRef = ref<HTMLDivElement | null>(null);//引用粒子容器元素
+const gradientPosition = ref('50% 50%');//渐变背景位置
 
-// 点击处理和粒子效果保持不变...
+// 按钮被点击时，既要通知父组件，又要触发粒子效果。
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
     emit('click', event);
@@ -68,33 +75,33 @@ const handleClick = (event: MouseEvent) => {
   }
 };
 
-// 幽灵按钮渐变效果...
+// 幽灵按钮渐变效果,渐变的渲染逻辑交给了 CSS,，JavaScript 只负责 “传递位置数据”
 const handleMouseMove = (event: MouseEvent) => { /* ... */ };
-const handleMouseLeave = () => { /* ... */ };
+const handleMouseLeave = () => { /* ... */ };//重置渐变位置
 
-// 创建点击粒子效果
+// JavaScript 粒子效果动画系统
 const createParticles = (event: MouseEvent) => {
   if (!buttonRef.value || !particlesRef.value) return;
   
-  const rect = buttonRef.value.getBoundingClientRect();
+  const rect = buttonRef.value.getBoundingClientRect();//获取按钮位置信息
   const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
+  const centerY = rect.height / 2;//计算按钮z轴中心位置
   
-  // 创建更多粒子（12个）
+  // 12个粒子的发射器
   for (let i = 0; i < 12; i++) {
     const particle = document.createElement('div');
     particle.classList.add('neon-button__particle');
     
     // 随机大小和颜色（更深的蓝色）
-    const size = Math.random() * 5 + 3;
-    const hue = 200 + Math.random() * 40; // 浅蓝色范围
-    const lightness = 30 + Math.random() * 20; // 更深的颜色
+    const size = Math.random() * 5 + 3;//随机大小
+    const hue = 200 + Math.random() * 40; // 随机色相
+    const lightness = 30 + Math.random() * 20; // 明度
     
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
     particle.style.backgroundColor = `hsl(${hue}, 90%, ${lightness}%)`;
     
-    // 初始位置
+    // 粒子定位到鼠标点击位置,全局坐标-钮偏移量
     const startX = event.clientX - rect.left - size / 2;
     const startY = event.clientY - rect.top - size / 2;
     
@@ -104,37 +111,37 @@ const createParticles = (event: MouseEvent) => {
     
     // 动画
     const startTime = performance.now();
-    const duration = 800 + Math.random() * 400;
+    const duration = 800 + Math.random() * 400;//动画持续时间
     
     const animateParticle = (currentTime: number) => {
       const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = 1 - Math.pow(1 - progress, 3); // 缓动函数
+      const progress = Math.min(elapsed / duration, 1);//粒子运动百分比
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // 缓动动画
       
-      // 计算粒子位置（向外扩散）
-      const angle = (i / 12) * Math.PI * 2;
-      const distance = (rect.width / 3) * easeProgress;
+      // 计算粒子位置（向外扩散）粒子位置 = 初始位置 + (cos(角度) × 距离, sin(角度) × 距离)
+      const angle = (i / 12) * Math.PI * 2;//平均分配粒子角度
+      const distance = (rect.width / 3) * easeProgress;//
       const x = startX + Math.cos(angle) * distance;
       const y = startY + Math.sin(angle) * distance;
       
-      // 计算透明度和大小
-      const opacity = 1 - progress;
-      const scale = 1 - (progress * 0.7);
+      // 计算透明度和大小,粒子透明度 = 1 - 动画进度
+      const opacity = 1 - progress;//粒子大小 = 初始大小 × (1 - 动画进度 × 缩放因子)
+      const scale = 1 - (progress * 0.7);//扩散距离 = 最大距离 × 缓动函数(动画进度)
       
-      particle.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-      particle.style.opacity = `${opacity}`;
+      particle.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;//移动粒子
+      particle.style.opacity = `${opacity}`;//控制粒子透明度
       
       if (progress < 1) {
-        requestAnimationFrame(animateParticle);
+        requestAnimationFrame(animateParticle);//requestAnimationFrame 是浏览器提供的动画 API，
       } else {
-        if (particlesRef.value && particle.parentNode === particlesRef.value) {
+        if (particlesRef.value && particle.parentNode === particlesRef.value) {//确保容器存在
           particlesRef.value.removeChild(particle);
         }
       }
-    };
+    };//控制粒子生命周期
     
-    requestAnimationFrame(animateParticle);
-  }
+    requestAnimationFrame(animateParticle);}//requestAnimationFrame 是浏览器提供的动画 API，
+  //递归调用下一次屏幕刷新前执行 animateParticle 函数！
 };
 </script>
 
@@ -143,7 +150,7 @@ export default {
   name: 'ErButton',
 };
 </script>
-
+//定义按钮通用样式
 <style scoped>
 /* 基础按钮样式（更大尺寸） */
 .neon-button {
@@ -264,7 +271,7 @@ export default {
   transform-origin: center;
   transition: all 0.2s ease-out;
 }
-
+/* 用于按钮的加载状态 */
 @keyframes loader-bounce {
   from { transform: translateY(0); opacity: 0.6; }
   to { transform: translateY(-0.625rem); opacity: 1; }
