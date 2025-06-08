@@ -18,6 +18,10 @@ text: 去 GitHub 笑我代码
 link: https://github.com/qinyso/qinyso-element
 
 features:
+### 核心技术栈  
+- **框架基础**：基于 `Vue 3` 开发，  
+- **文档构建**：采用 `VitePress` 生成静态文档站点，支持 Markdown 快速编写示例，本地开发热更新秒级响应；  
+- **包管理**：使用 `pnpm` 作为包管理器，结合 `Monorepo` 单体仓库架构，实现多包（组件库、文档、工具库）高效协同。  
 
 title: 我是纯纯新手
 details: 写组件库像闯关！按钮的粒子效果改了 800 遍... 但最后做出来啦！
